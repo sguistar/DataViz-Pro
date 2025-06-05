@@ -8,8 +8,10 @@ import java.io.*;
 
 public class DataModel
 {
+//    public record Dataset(String name, List<Integer> values) {}
     private final List<Integer> data = new ArrayList<>();
 
+    //读取csv文件
     public void readCSV(String filePath) throws IOException
     {
         data.clear();
@@ -21,26 +23,25 @@ public class DataModel
             String[] nums = line.split(",");
             for (String num : nums)
             {
-                data.add(Integer.parseInt(num.trim()));
+                data.add((int) Double.parseDouble(num.trim()));
             }
         }
         br.close();
     }
-
 
     public List<Integer> getData()
     {
         return data;
     }
 
+    public void setData(List<Integer> list)
+    {
+        data.clear();
+        data.addAll(list);
+    }
+
     public void quickSort()
     {
         Collections.sort(data);
     }
-
-    public int binarySearch(int target)
-    {
-        return Collections.binarySearch(data, target);
-    }
-
 }
