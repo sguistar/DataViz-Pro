@@ -138,6 +138,16 @@ public class ChartPanel extends JPanel
         Graphics2D g2 = (Graphics2D) g.create();
         int w = getWidth(), h = getHeight();
         int max = Collections.max(data);
+
+        /* 单个数据点：仅绘制点，避免除零 */
+        if (data.size() == 1)
+        {
+            int cy = h - (int) (data.get(0) / (double) max * (h - 40));
+            g2.fillOval(w / 2 - 4, cy - 4, 8, 8);
+            g2.dispose();
+            return;
+        }
+
         int stepX = w / (data.size() - 1);
 
         /* 线条 */
